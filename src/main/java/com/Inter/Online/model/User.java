@@ -1,5 +1,8 @@
 package com.Inter.Online.model;
 
+import com.Inter.Online.dtos.userDTO.UserRequestDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -31,4 +34,9 @@ public class User {
 
     @NotBlank(message = "A senha não pode ser vazia!")
     private String password;
+
+    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    private Account account;
 }
